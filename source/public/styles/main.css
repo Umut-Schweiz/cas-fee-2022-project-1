@@ -1,0 +1,30 @@
+@import url("./reset.css");
+@import url("./layout.css");
+
+/***********ROOT AND BODY**********/
+:root {
+    --body-background: #d7d5d2;
+    --header-footer-background: #f1f1f1;
+    --body-font-color: #151514;
+    --button-bg-color: #2276DD;
+    --buttom-font-color: white;
+    --border-main: 4px solid #787272;
+    --section-box-shadow: 6px 7px 15px -3px #000000;
+    --checkbox-bg-color: #0bb79b;
+
+}
+
+.dark-mode {
+    --body-background: #1c2020d9;
+    --header-footer-background: #505050;
+    --body-font-color: #f1f1f1;
+    --buttom-font-color: #e50b0b;
+    --border-main: 4px solid #9b6b6b;
+    --section-box-shadow: 6px 7px 15px -3px #9f9797;
+    --checkbox-bg-color: #C70F1E;
+}
+
+body {
+    background-color:var(--body-background);
+    color:var(--body-font-color);
+}
