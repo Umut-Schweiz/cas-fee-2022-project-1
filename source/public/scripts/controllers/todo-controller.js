@@ -99,19 +99,25 @@ class TodoController {
         const todo = await todoService.getTodoById(editBtnId);
         this.showTodosForm(todo);
 
+        this.addTodoOverviewButton.addEventListener("click", async (e) => {
+          e.preventDefault();
+          this.initialize();
+        });
+
         this.addTodoUpdateAndOverviewButton.addEventListener(
           "click",
           async (e) => {
             e.preventDefault();
-            const updateTodo = {
+            const updatedTodo = {
               title: this.todoTitle.value,
               description: this.todoDescription.value,
               importance: this.todoImportance.value,
               dueDate: this.todoDueDate.value,
-              finishedState: true,
+              finishedState: this.todoFinishedState.checked ,
             };
-            await todoService.updateTodo(editBtnId, updateTodo);
+            await todoService.updateTodo(editBtnId, updatedTodo);
             this.initialize();
+
           }
         );
       });
@@ -166,8 +172,8 @@ class TodoController {
                             />
                             <label for="list-todo-finishedState">Finished</label>                            
                         </div>
-                        <div class="description">${todo.description}</div>
-                        <div class="date">${todo.dueDate}</div>
+                        <div class="todo-description">${todo.description}</div>
+                        <div class="todo-date">${this.dateFormatter(todo.dueDate)}</div>
                         <button data-delete-id ="${
                           todo.id
                         }" class="todo-delete-btn">Delete</button>
@@ -196,6 +202,16 @@ class TodoController {
     this.todoEditBtns = document.querySelectorAll(".todo-edit-btn");
     this.todoDeleteBtns = document.querySelectorAll(".todo-delete-btn");
   }
+
+  /** ***going to move into utils */
+
+
+  dateFormatter(pDate){
+    const options = {year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = (new Date(pDate)).toLocaleString('de-DE', options)
+    return formattedDate
+  }
+
 
   calculateRemainingDay(pCreatedDate, pDueDate) {
     const diffInMs = new Date(pDueDate) - new Date(pCreatedDate);

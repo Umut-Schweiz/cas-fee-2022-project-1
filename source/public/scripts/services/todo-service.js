@@ -56,8 +56,8 @@ export default class TodoService {
     return todo;
   }
 
-  async updateTodo(id) {
-     await this.fetchReq("PUT",`http://localhost:3000/api/todos/${id}`, {title : "updated"});
+  async updateTodo(id, pUpdatedTodo) {
+     await this.fetchReq("PUT",`http://localhost:3000/api/todos/${id}`, pUpdatedTodo);
   }
 
 }
