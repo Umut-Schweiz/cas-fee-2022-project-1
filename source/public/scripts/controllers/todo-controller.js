@@ -41,28 +41,34 @@ class TodoController {
 
     this.sortByCreationBtn.addEventListener("click", () => {
       this.loadData();
-      this.todosFromDB = orderService.sortTodos(this.todosFromDB , "creation")
+      this.todosFromDB = orderService.sortTodos(this.todosFromDB, "creation");
       this.showTodos(this.todosFromDB);
       this.eventHandlers();
-    })
+    });
 
     this.todoFilterSelectElement.addEventListener("change", (event) => {
-      if(event.target.value === "all"){
+      if (event.target.value === "all") {
         this.loadData();
         this.showTodos(this.todosFromDB);
         this.eventHandlers();
-      }else if(event.target.value === "finished"){
+      } else if (event.target.value === "finished") {
         this.loadData();
-        this.todosFromDB = orderService.filterTodos(this.todosFromDB, "finished");
+        this.todosFromDB = orderService.filterTodos(
+          this.todosFromDB,
+          "finished"
+        );
         this.showTodos(this.todosFromDB);
         this.eventHandlers();
-      }else if(event.target.value === "unfinished") {
+      } else if (event.target.value === "unfinished") {
         this.loadData();
-        this.todosFromDB = orderService.filterTodos(this.todosFromDB, "unfinished");
+        this.todosFromDB = orderService.filterTodos(
+          this.todosFromDB,
+          "unfinished"
+        );
         this.showTodos(this.todosFromDB);
         this.eventHandlers();
       }
-    })
+    });
 
     /** ********END FILTERING AND SORTING **************** */
 
@@ -76,7 +82,7 @@ class TodoController {
           description: this.todoDescription.value,
           importance: this.todoImportance.value,
           dueDate: this.todoDueDate.value,
-          finishedState:this.todoFinishedState.checked,
+          finishedState: this.todoFinishedState.checked,
         };
         const result = await todoService.addTodo(newTodo);
         return result;
@@ -84,45 +90,39 @@ class TodoController {
       this.addTodoOverviewButton.addEventListener("click", async (e) => {
         e.preventDefault();
         this.initialize();
-      })
-
+      });
     });
 
-    this.todoEditBtns.forEach(editBtn => {
-
+    this.todoEditBtns.forEach((editBtn) => {
       editBtn.addEventListener("click", async (event) => {
         const editBtnId = event.target.dataset.editId;
         const todo = await todoService.getTodoById(editBtnId);
         this.showTodosForm(todo);
-  
-        this.addTodoUpdateAndOverviewButton.addEventListener("click", async(e) => {
-          e.preventDefault();
-          const updateTodo = {
-            title: this.todoTitle.value,
-            description: this.todoDescription.value,
-            importance: this.todoImportance.value,
-            dueDate: this.todoDueDate.value,
-            finishedState: true ,
-          };
-          const result = await todoService.updateTodo(editBtnId, updateTodo);
-          this.initialize();
-          
-          return result
-        })
-        
-      })
-    })
-    
-    
 
-    this.todoDeleteBtns.forEach(deleteBtn => {
-      deleteBtn.addEventListener('click', async(e) => {
-        const result = await todoService.deleteTodo(e.target.dataset.deleteId);
+        this.addTodoUpdateAndOverviewButton.addEventListener(
+          "click",
+          async (e) => {
+            e.preventDefault();
+            const updateTodo = {
+              title: this.todoTitle.value,
+              description: this.todoDescription.value,
+              importance: this.todoImportance.value,
+              dueDate: this.todoDueDate.value,
+              finishedState: true,
+            };
+            await todoService.updateTodo(editBtnId, updateTodo);
+            this.initialize();
+          }
+        );
+      });
+    });
+
+    this.todoDeleteBtns.forEach((deleteBtn) => {
+      deleteBtn.addEventListener("click", async (e) => {
+        await todoService.deleteTodo(e.target.dataset.deleteId);
         this.initialize();
-        return result;
-      })
-    })
-
+      });
+    });
   }
 
   showTodos(pData) {
@@ -146,12 +146,17 @@ class TodoController {
                       .map(
                         (todo) => `
                     <div class="todo-item">
-                        <div class="remaining-time">${this.calculateRemainingDay(todo.createdAt , todo.dueDate)}</div>
+                        <div class="remaining-time">${this.calculateRemainingDay(
+                          todo.createdAt,
+                          todo.dueDate
+                        )}</div>
                         <div class="description">${todo.title}</div>
                         <div class="importance">${this.importanceSymbole(
                           todo.importance
                         )}</div>
-                        <button data-edit-id="${todo.id}" class="todo-edit-btn">Edit</button>
+                        <button data-edit-id="${
+                          todo.id
+                        }" class="todo-edit-btn">Edit</button>
                         <div>
                             <input
                             type="checkbox"
@@ -163,7 +168,9 @@ class TodoController {
                         </div>
                         <div class="description">${todo.description}</div>
                         <div class="date">${todo.dueDate}</div>
-                        <button data-delete-id ="${todo.id}" class="todo-delete-btn">Delete</button>
+                        <button data-delete-id ="${
+                          todo.id
+                        }" class="todo-delete-btn">Delete</button>
                         </div>
                         `
                       )
@@ -183,19 +190,21 @@ class TodoController {
     this.sortByImportanceBtn = document.querySelector(".sort-by-importance");
     this.sortByDueDateBtn = document.querySelector(".sort-by-due-date");
     this.sortByCreationBtn = document.querySelector(".sort-by-creation");
-    this.todoFilterSelectElement = document.querySelector(".todo-filter-select")
-    this.todoEditBtns = document.querySelectorAll(".todo-edit-btn")
-    this.todoDeleteBtns = document.querySelectorAll(".todo-delete-btn")
+    this.todoFilterSelectElement = document.querySelector(
+      ".todo-filter-select"
+    );
+    this.todoEditBtns = document.querySelectorAll(".todo-edit-btn");
+    this.todoDeleteBtns = document.querySelectorAll(".todo-delete-btn");
   }
 
   calculateRemainingDay(pCreatedDate, pDueDate) {
-    const diffInMs   = new Date(pDueDate) - new Date(pCreatedDate)
+    const diffInMs = new Date(pDueDate) - new Date(pCreatedDate);
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-    if(diffInDays < 0){
+    if (diffInDays < 0) {
       return "Time over";
     }
-    if(diffInDays == 1) {
+    if (diffInDays == 1) {
       return "in a day";
     }
     return `in ${diffInDays.toFixed()} days`;
@@ -209,7 +218,6 @@ class TodoController {
     return symbole;
   }
 
-  
   showTodosForm(_pEditTodo = []) {
     const todoForm = `
                 <section class="form-container">
@@ -217,7 +225,9 @@ class TodoController {
                     <form>
                         <div>
                         <label for="add-todo-title" required >Title</label>
-                        <input id="add-todo-title" name="add-todo-title" type="text" placeholder="${_pEditTodo.title ?? ""}"/>
+                        <input id="add-todo-title" name="add-todo-title" type="text" placeholder="${
+                          _pEditTodo.title ?? ""
+                        }"/>
                         </div>
                         <div>
                         <label for="add-todo-importance">Importance</label>
@@ -239,7 +249,9 @@ class TodoController {
                         </div>
                         <div>
                         <label for="add-todo-description">Description</label>
-                        <textarea id="add-todo-description" name="add-todo-description" placeholder="${_pEditTodo.description ?? ""}"></textarea>
+                        <textarea id="add-todo-description" name="add-todo-description" placeholder="${
+                          _pEditTodo.description ?? ""
+                        }"></textarea>
                         </div>
                         <div class="add-todo-buttons">
                         <button class="add-todo-create-button">Create</button>
@@ -251,9 +263,15 @@ class TodoController {
                     `;
 
     this.todoContainer.innerHTML = todoForm;
-    this.addTodoCreateButton = document.querySelector(".add-todo-create-button");
-    this.addTodoOverviewButton = document.querySelector(".add-todo-overview-button");
-    this.addTodoUpdateAndOverviewButton = document.querySelector(".add-todo-update-overview-button");
+    this.addTodoCreateButton = document.querySelector(
+      ".add-todo-create-button"
+    );
+    this.addTodoOverviewButton = document.querySelector(
+      ".add-todo-overview-button"
+    );
+    this.addTodoUpdateAndOverviewButton = document.querySelector(
+      ".add-todo-update-overview-button"
+    );
     this.todoTitle = document.querySelector("#add-todo-title");
     this.todoDescription = document.querySelector("#add-todo-description");
     this.todoImportance = document.querySelector("#add-todo-importance");
