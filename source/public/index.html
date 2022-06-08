@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Note App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
-  <script src="scripts/index.js" type="module"></script>
 
-  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-<h1>Note App</h1>
 
+  <header class="header">
+    <img src="./assets/logo-ost.svg" class="logo"></img>
+    <button class="style-btn">Toogle Style</button>
+  </header>
+  <main id="todo-app-container"></main>
+  <footer>
+    <p>Author: Umut Güngör<br>
+      <a href="umut.guengoer@ost.ch">umut.guengoer@ost.ch</a>
+    </p>
+  </footer>
+  <script src="./scripts/models/todo.js" type="module"></script>
+  <script src="./scripts/controllers/todo-controller.js" type="module"></script>
+  <script src="./scripts/services/todo-service.js" type="module"></script>
+  
 </body>
 </html>
-
-<!--    <header>
-      <nav>
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./about.html">About</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <h1>Dies wird irgendwann einen Todo App sein</h1>
-    </main>
-
-    <footer>
-      <p>&copy; MyName</p>
-    </footer>
-  </body>
- -->
