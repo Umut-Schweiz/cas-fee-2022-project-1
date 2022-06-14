@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cors from 'cors';
 import { dirname, join } from 'path';
@@ -10,15 +11,10 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const corsOptions = {
-    origin: `http://localhost:3001`
-};
-
-// cors
-app.use(cors(corsOptions));
+app.use(cors());
 // body-parser
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: false}))
 
 app.use(express.static(join(currentDir, '/public/html')));
 app.use("/api/todos", todoRoutes);

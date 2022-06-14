@@ -1,29 +1,3 @@
-/************* GENERAL *********************/
-input[type="checkbox"] {
-  margin: 0 0.2em 0.8em 0;
-  height: 1rem;
-  width: 1rem;
-  vertical-align: middle;
-}
-
-input[type="checkbox"]:checked {
-  background: url('../assets/icon-check.svg') no-repeat center / 75% auto;
-  background-color: var(--checkbox-bg-color);
-}
-
-button {
-  background-color: var(--button-bg-color);
-  color: var(--buttom-font-color);
-  font: 0.75rem sans-serif;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  padding: 0.75rem 1.25rem;
-}
-
-button:hover {
-  background-color: #5491db;
-}
-
 /************HEADER ***********/
 header {
   position: fixed;
@@ -63,11 +37,16 @@ main section {
   justify-content: space-around;
 }
 
-.filter-bar select {
-  content: '<>'
+.filter-bar > select {
+  text-align: center;
 }
 
 /************ TODO LIST AND ITEMS *******/
+.todo-list p {
+  text-align: center;
+  font-size:xx-large;
+  margin: 1rem;
+}
 .todo-item {
   display: flex;
   flex-wrap: wrap;
@@ -86,15 +65,23 @@ main section {
   margin: 2px;
 }
 
-.create-btn {
-  font-size: 35px;
-  margin: 1rem;
-  border-radius: 50%;
+.top-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-buttons button {
   height: 60px;
   width: 60px;
-  cursor: pointer;
-  left: 42%;
-  position: relative;
+}
+
+.delete-all-btn{
+  background-color: var(--delete-all-btn-bg-color);
+  color: var(--delete-all-btn-font-color)
+}
+
+.create-btn {
+  font-size: 35px;
 }
 
 /************ FOOTER ************/
@@ -108,11 +95,9 @@ footer {
 }
 
 /*********** FORM *************/
-
 h1 {
   text-align: center;
 }
-
 /************ FORM PAGE ***********/
 form {
   box-sizing: border-box;
@@ -147,14 +132,14 @@ form textarea {
   padding: 0.5rem 0.75rem;
 }
 
-form select {
-  background: url("../assets/icon-arrow-down-thin.svg") no-repeat center right 0.25rem;
-}
-
 form label {
   display: inline-block;
   font: bold 1rem sans-serif;
   margin: 1rem 0;
+}
+
+form select {
+  background: url("../assets/icon-arrow-down-thin.svg") no-repeat center right 0.25rem;
 }
 
 .add-todo-buttons {
