@@ -7,7 +7,7 @@ const create = async (req, res) => {
     try {
         const todo = await new Todo(req.body).save()
         res.send(todo);
-      } catch (error) {
+    } catch (error) {
         res.send(error);
     }
 }
@@ -45,6 +45,20 @@ const updateById = async (req, res) => {
     }
 }
 
+const updateFinishedStateById = async (req, res) => {
+    try {
+        await Todo.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body
+        );
+        res.send({
+            message: `FinishedState were updated successfully!`
+          });
+    } catch (error) {
+        res.send(error);
+    }
+}
+
 const deleteTodo = async (req, res) => {
     try {
         const todo = await Todo.findByIdAndDelete(req.params.id);
@@ -71,5 +85,6 @@ export default {
     getById,
     updateById,
     deleteTodo,
-    deleteAll
+    deleteAll,
+    updateFinishedStateById
 }

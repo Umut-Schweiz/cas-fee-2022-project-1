@@ -44,8 +44,11 @@ export default class TodoService {
 
   async deleteTodo(id) {
     const deletedTodo = this.fetchReq("DELETE",`http://localhost:3000/api/todos/${id}` );
-
     return deletedTodo;
+  }
+
+  async deleteAllTodos() {
+    await this.fetchReq("DELETE",`http://localhost:3000/api/todos`);
   }
 
   async getTodoById(id) {
@@ -58,6 +61,10 @@ export default class TodoService {
 
   async updateTodo(id, pUpdatedTodo) {
      await this.fetchReq("PUT",`http://localhost:3000/api/todos/${id}`, pUpdatedTodo);
+  }
+
+  async updateFinishedStateTodo(id, pUpdatedFinishedState) {
+    await this.fetchReq("PATCH",`http://localhost:3000/api/todos/${id}`, pUpdatedFinishedState);
   }
 
 }

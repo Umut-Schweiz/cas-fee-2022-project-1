@@ -34,7 +34,7 @@ export default class Order {
     }
 
     sortTodos(pArray, sortBy = 'title') {
-
+        
         if (sortBy === 'title') {
             return pArray.sort(this.sortByName);
         }

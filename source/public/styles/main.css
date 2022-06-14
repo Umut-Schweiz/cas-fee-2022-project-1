@@ -11,6 +11,8 @@
     --border-main: 4px solid #787272;
     --section-box-shadow: 6px 7px 15px -3px #000000;
     --checkbox-bg-color: #0bb79b;
+    --delete-all-btn-bg-color:red;
+    --delete-all-btn-font-color:#1c2020d9;
 
 }
 
@@ -21,10 +23,37 @@
     --buttom-font-color: #e50b0b;
     --border-main: 4px solid #9b6b6b;
     --section-box-shadow: 6px 7px 15px -3px #9f9797;
-    --checkbox-bg-color: #C70F1E;
+    --checkbox-bg-color: #7a87d2;
+    --delete-all-btn-bg-color:red;
+    --delete-all-btn-font-color:#f1f1f1;
 }
 
 body {
     background-color:var(--body-background);
     color:var(--body-font-color);
 }
+/************* GENERAL *********************/
+input[type="checkbox"] {
+    margin: 0 0.2em 0.8em 0;
+    height: 1rem;
+    width: 1rem;
+    vertical-align: middle;
+  }
+  
+  input[type="checkbox"]:checked {
+    background: url('../assets/icon-check.svg') no-repeat center / 75% auto;
+    background-color: var(--checkbox-bg-color);
+  }
+  
+  button {
+    background-color: var(--button-bg-color);
+    color: var(--buttom-font-color);
+    font: 0.75rem sans-serif;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  button:hover {
+    background-color: #5491db;
+  }
