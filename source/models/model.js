@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
-import dbConfig  from '../config/db.config.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const db = {};
 db.mongoose = mongoose;
-db.url = dbConfig.url;
+db.url = process.env.DB_URL;
 
 const schema = mongoose.Schema(
     {
