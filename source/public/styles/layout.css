@@ -139,6 +139,7 @@ form label {
 }
 
 form select {
+  color: var(--select-input-color);
   background: url("../assets/icon-arrow-down-thin.svg") no-repeat center right 0.25rem;
 }
 
@@ -151,4 +152,8 @@ form select {
 
 button:focus {
   box-shadow: 0 0 0 4px black;
+}
+
+.invalid {
+  border-color: red;
 }

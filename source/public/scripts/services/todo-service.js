@@ -1,6 +1,7 @@
 import Todo from "../models/todo.js";
 
 export default class TodoService {
+  
   async fetchReq(method, url, data = null) {
     const reqContent = {
       method,
