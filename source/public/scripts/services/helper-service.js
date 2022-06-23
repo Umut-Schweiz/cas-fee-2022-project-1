@@ -13,7 +13,7 @@ export default class Helper {
     if (diffInDays < 0) {
       return "Time over";
     }
-    if (diffInDays == 1) {
+    if (diffInDays === 1) {
       return "in a day";
     }
     return `in ${diffInDays.toFixed()} days`;
