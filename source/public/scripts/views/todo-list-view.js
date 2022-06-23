@@ -1,6 +1,12 @@
 import Helper from "../services/helper-service.js";
+import GeneralListView  from "./general-view.js";
 
 export default class TodoListView {
+
+  constructor(){
+    this.generalListView = new GeneralListView();
+  }
+
   showTodos(pData) {
     const filterMenu = `
                         <section class="filter-bar">
@@ -77,5 +83,28 @@ export default class TodoListView {
             `;
 
     return todosView;
+  }
+
+  renderTodosView (pTodos) {
+    this.generalListView.renderGeneralView();
+    this.generalListView.todoContainer.innerHTML = this.showTodos(pTodos);
+    this.styleSwitchBtn =  this.generalListView.toogleStyleBtn;
+    this.addNewTodoButtonElemet = document.querySelector(".create-btn");
+    this.deleteAllTodosButtonElement =
+      document.querySelector(".delete-all-btn");
+    this.sortByNameBtn = document.querySelector(".sort-by-name");
+    this.sortByImportanceBtn = document.querySelector(".sort-by-importance");
+    this.sortByDueDateBtn = document.querySelector(".sort-by-due-date");
+    this.sortByCreationBtn = document.querySelector(".sort-by-creation");
+    this.todoFilterSelectElement = document.querySelector(
+      ".todo-filter-select"
+    );
+    this.todoEditBtns = document.querySelectorAll(".todo-edit-btn");
+    this.todoDeleteBtns = document.querySelectorAll(".todo-delete-btn");
+    this.todoListContainer = document.querySelector(".todo-list");
+    this.todoCheckboxElement = document.querySelectorAll(
+      ".list-todo-finishedState"
+    );
+    
   }
 }
