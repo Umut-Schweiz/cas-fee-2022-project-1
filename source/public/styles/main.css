@@ -13,6 +13,7 @@
     --checkbox-bg-color: #0bb79b;
     --delete-all-btn-bg-color:red;
     --delete-all-btn-font-color:#1c2020d9;
+    --select-input-color:red;
 
 }
 
@@ -26,6 +27,7 @@
     --checkbox-bg-color: #7a87d2;
     --delete-all-btn-bg-color:red;
     --delete-all-btn-font-color:#f1f1f1;
+    --select-input-color:aquamarine;
 }
 
 body {

@@ -1,4 +1,11 @@
+import GeneralListView  from "./general-view.js";
+
 export default class TodoFormView {
+
+  constructor(){
+    this.generalListView = new GeneralListView();
+  } 
+
   showTodosForm(type , _pEditTodo = []) {
     const todoForm = `
                     <section class="form-container">
@@ -44,4 +51,29 @@ export default class TodoFormView {
                         `;
     return todoForm;
   }
+
+  renderTodoForm(type, _pEditTodo = []) {
+    this.generalListView.renderGeneralView();
+    this.generalListView.todoContainer.innerHTML = this.showTodosForm(
+      type,
+      _pEditTodo
+    );
+    this.styleSwitchBtn =  this.generalListView.toogleStyleBtn;
+    this.addTodoCreateButton = document.querySelector(
+      ".add-todo-create-button"
+    );
+    this.addTodoOverviewButton = document.querySelector(
+      ".add-todo-overview-button"
+    );
+    this.addTodoUpdateAndOverviewButton = document.querySelector(
+      ".add-todo-update-overview-button"
+    );
+    this.todoTitle = document.querySelector("#add-todo-title");
+    this.todoDescription = document.querySelector("#add-todo-description");
+    this.todoImportance = document.querySelector("#add-todo-importance");
+    this.todoDueDate = document.querySelector("#add-todo-due-date");
+    this.todoFinishedState = document.querySelector("#add-todo-finishState");
+  }
+
+
 }
